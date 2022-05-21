@@ -20,7 +20,7 @@ sqlite <- dbDriver("SQLite")
 conn <- dbConnect(sqlite,"desafio-tecnico.db") 
 
 dbListTables(conn,"accounts",accounts)
-df
+df$
 
 
 
