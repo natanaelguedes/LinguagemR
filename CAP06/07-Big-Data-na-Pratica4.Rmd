@@ -1,8 +1,9 @@
 ---
 title: "Big Data na Prática 4 - Customer Churn Analytics"
 output:
-  pdf_document: default
+  word_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r global_options, include=FALSE}
@@ -367,3 +368,11 @@ caret::confusionMatrix(pred_rf_new, testing$Churn)
 ```{r}
 varImpPlot(rfModel_new, sort=T, n.var = 10, main = 'Top 10 Feature Importance')
 ```
+
+
+
+
+output:
+  html_document:
+    toc: true
+    toc_float: true
