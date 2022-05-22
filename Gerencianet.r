@@ -4,69 +4,58 @@ library(dplyr)
 library(sqldf)
 install.packages("xlsx")
 library("xlsx")
-
-library(readxl)
-charges <- read_excel("charges.xlsx")
-View(charges)
+ 
 
 library(RSQLite)
 
 con <- dbConnect(RSQLite::SQLite(), dbname = "desafio-tecnico.db")
+con
+dbListTables(con)
+dbListTables(con)
+dbReadTable(con)
+dbListObjects(con)
+dbListTables(conn)
+dbListFields(con, "mtcars")
 
-dbWriteTable(con, "iris", accounts)
+library(sqldf)
 
-charges$fraud="fraud " 
-sqlite <- dbDriver("SQLite")
-conn <- dbConnect(sqlite,"desafio-tecnico.db") 
+library(dplyr)
+mydb <- src_sqlite("desafio-tecnico.db")
+src_tbls(mydb)
 
-dbListTables(conn,"accounts",accounts)
-df$
+ 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+dbExecute(con, "SELECT
+    P.id,
+    P.account_number, 
+    P.status 
+FROM
+    charges  P
+WHERE
+    P.id IN
+    (
+        SELECT
+            C.id
+        FROM
+            accounts   C
+        WHERE
+            P.id = C.id
+    )")
 
 
- df = data.frame(charges) 
-df$fraud<-1     
-df
-write.e
+dbListTables(con) 
 
 
-sqldf("select [Sepal.Width] from iris
-      where
-        [Sepal.Width]  >= 3.0")
-
-library("xlsx")
-# Write the first data set in a new workbook
-write.xlsx(df, file = "charges.xlsx",
-           sheetName = "First Sheet", append = FALSE)
+dbGetQuery(con, "SELECT  P.id,P.account_number, P.status FROM    charges  P WHERE    P.id IN
+( SELECT    C.id      FROM    accounts   C        WHERE            P.id = C.id    )")
 
 
 
 
 
+data1 <- read.csv("D://sqlite//mycsv.csv", sep = ";", header=TRUE, stringsAsFactors=FALSE)
+data1
+data1$fraud[data1$status== "paid"] <- 0
+data1$fraud[data1$status== "unpaid"] <- 1
 
-
-
-con <- DBI::dbConnect(odbc::odbc(),
-                      Driver   = "[your driver's name]",
-                      Server   = "[your server's path]",
-                      Database = "[your database's name]",
-                      UID      = rstudioapi::askForPassword("Database user"),
-                      PWD      = rstudioapi::askForPassword("Database password"),
-                      Port     = 5432)
+write.csv(data1,"D://sqlite//Resultadocsv.csv", row.names = FALSE)
